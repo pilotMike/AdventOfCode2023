@@ -11,6 +11,8 @@
 
     <ItemGroup>
         <PackageReference Include="LanguageExt.Core" Version="4.4.8" />
+        <PackageReference Include="morelinq" Version="4.1.0" />
+        <PackageReference Include="Pidgin" Version="3.2.3" />
     </ItemGroup>
 
     <ItemGroup>
