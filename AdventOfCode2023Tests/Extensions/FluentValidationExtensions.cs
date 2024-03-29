@@ -11,10 +11,11 @@ public static class FluentValidationExtensions
         {
             assertion(x);
             return x;
-        }).IfNone(() => raise<T>(new Exception("Assertion failed")));
+        }).IfNone(() => raise<T>(new Exception("Should be some but got None")));
     
     public static Option<T> ShouldBeNone<T>(this Option<T> option) =>
-        option.Map(_ => raise<T>(new Exception("Assertion failed")));
+        option.Match(s => raise<Option<T>>(new Exception("Should be None but found " + s)),
+            () => option);
     
     public static Either<TLeft,TRight> ShouldBeLeft<TLeft, TRight>(this Either<TLeft, TRight> either, Action<TLeft> assertion)
     {

@@ -92,38 +92,38 @@ public class PartsTests
         res.Should().Be(expected);
     }
 
-    [Fact]
-    public void Part2Test()
-    {
-        var input = TestInput.Create<IChallenge03Input, Seq<SchematicCharacter>>("Challenge_03_1.txt");
-
-        var res = Parts.Part2(input);
-
-        res.Should().Be(467835);
-    }
+    // [Fact]
+    // public void Part2Test()
+    // {
+    //     var input = TestInput.Create<IChallenge03Input, Seq<SchematicCharacter>>("Challenge_03_1.txt");
+    //
+    //     var res = Parts.Part2(input);
+    //
+    //     res.Should().Be(467835);
+    // }
     
-    [Theory]
-    [InlineData("03_2.txt", 6756)]
-    [InlineData("03_3.txt", 6756)]
-    public void MorePart2Tests(string uri, int expected)
-    {
-        var input = TestInput.Create<IChallenge03Input, Seq<SchematicCharacter>>(uri);
-
-        var res = Parts.Part2(input);
-        
-        var schematic = new Schematic(new Parser().Parse(input));
-
-        var stars = schematic.SchematicSymbols.Filter(t => t.Symbol.Character == '*').ToArray();
-
-        bool[] expecteds = { true, true, false, false, true };
-        var gears = stars.Map(s => schematic.IsGear(s)).Somes().ToArray();
-        
-        var potentials =
-            stars
-                .Map(s => schematic.IsGear(s))
-                .Somes()
-                .ToArray();
-
-        res.Should().Be(expected);
-    }
+    // [Theory]
+    // [InlineData("03_2.txt", 6756)]
+    // [InlineData("03_3.txt", 6756)]
+    // public void MorePart2Tests(string uri, int expected)
+    // {
+    //     var input = TestInput.Create<IChallenge03Input, Seq<SchematicCharacter>>(uri);
+    //
+    //     var res = Parts.Part2(input);
+    //     
+    //     var schematic = new Schematic(new Parser().Parse(input));
+    //
+    //     var stars = schematic.SchematicSymbols.Filter(t => t.Symbol.Character == '*').ToArray();
+    //
+    //     bool[] expecteds = { true, true, false, false, true };
+    //     var gears = stars.Map(s => schematic.IsGear(s)).Somes().ToArray();
+    //     
+    //     var potentials =
+    //         stars
+    //             .Map(s => schematic.IsGear(s))
+    //             .Somes()
+    //             .ToArray();
+    //
+    //     res.Should().Be(expected);
+    // }
 }

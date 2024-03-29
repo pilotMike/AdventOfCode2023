@@ -1,38 +1,43 @@
 namespace AdventOfCode2023.Domain;
 
-public record struct Line(Point Start, Point End)
+public readonly record struct Line(Point Start, Point End)
 {
     public bool IsPoint() => Start == End;
-    public bool Contains(Point currPoint)
-    {
-        if (this.IsPoint())
-        {
-            return Start == currPoint;
-        }
-        
-        var (point1, point2) = (Start, End);
-        var dxc = currPoint.X - point1.X;
-        var dyc = currPoint.Y - point1.Y;
-
-        var dxl = point2.X - point1.X;
-        var dyl = point2.Y - point1.Y;
-
-        var cross = dxc * dyl - dyc * dxl;
-
-        if (cross != 0) return false;
-
-        bool res;
-        if (Math.Abs(dxl) >= Math.Abs(dyl))
-            res = dxl > 0 ? 
-                point1.X <= currPoint.X && currPoint.X <= point2.X :
-                point2.X <= currPoint.X && currPoint.X <= point1.X;
-        else
-            res = dyl > 0 ? 
-                point1.Y <= currPoint.Y && currPoint.Y <= point2.Y :
-                point2.Y <= currPoint.Y && currPoint.Y <= point1.Y;
-
-        return res;
-    }
-
+    public bool Contains(Point currPoint) =>
+        IntersectionModule.Contains(this, currPoint);
+    
     public static implicit operator Line(PointRange pr) => new(pr.Start, pr.End);
+}
+
+public readonly record struct InfiniteLine(Point Point, Slope Slope)
+{
+    public double DistanceAlong(Point point)
+        => Point.CrossProduct(Point, point)/Math.Sqrt(Point.X*Point.X + Point.Y*Point.Y);
+    
+    public double DistanceAlong(PointD point)
+        => PointD.CrossProduct((PointD)Point, point)/Math.Sqrt(Point.X*Point.X + Point.Y*Point.Y);
+
+    public double DistanceTo(PointD point, bool signed = false)
+    {
+        var (A, B) = Point;
+        var d = A*point.X + B*point.Y + Slope;
+        var m = Math.Sqrt( A*A+B*B );
+
+        return signed ? d/m : Math.Abs(d)/m;
+    }
+    
+    public double DistanceTo(Point point, bool signed = false)
+    {
+        var (A, B) = Point;
+        var d = A*point.X + B*point.Y + Slope;
+        var m = Math.Sqrt( A*A+B*B );
+
+        return signed ? d/m : Math.Abs(d)/m;
+    }
+    
+    public bool Contains(Point point, double tolerance = 1e-11) => 
+        DistanceTo(point) <= tolerance;
+    
+    public bool Contains(PointD point, double tolerance = 1e-11) => 
+        DistanceTo(point) <= tolerance;
 }
