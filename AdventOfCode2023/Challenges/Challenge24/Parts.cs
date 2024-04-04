@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using AdventOfCode2023.Challenges.Challenge04.BorrowedCode;
 using AdventOfCode2023.Domain;
+using MoreLinq;
 
 namespace AdventOfCode2023.Challenges.Challenge04;
 
@@ -96,13 +97,41 @@ public static class Parts
             .Somes()
             .Count(i => (boundary ?? TestBoundary).Contains(i.Point));
     
-    // public static int Part2_A(IChallenge24Input input, Boundary? boundary = null) =>
+    // 1 is the most :(
+    // public static Unit MostCommonIntersectionPoints(IChallenge24Input input, Boundary? boundary = null) =>
+    //     new Parser().Parse(input)
+    //         .CartesianPairs()
+    //         .Filter(p => p.first != p.second)
+    //         .Map(p => IntersectionModule.Intersection(p.first.ToHailStone2().ToRay(), p.second.ToHailStone2().ToRay()))
+    //         .Somes()
+    //         .Filter(i => (boundary ?? TestBoundary).Contains(i.Point))
+    //         .GroupBy(i => i.Point)
+    //         .Select(ps => new {point = ps.Key, count = ps.Count()})
+    //         .OrderByDescending(g => g.count)
+    //         .Take(5)
+    //         .Apply(gs =>
+    //         {
+    //             gs.ForEach(g => Console.WriteLine($"{g.point} : {g.count}"));
+    //             return unit;
+    //         });
+    
+    // none intersect with the 3D space formula that I found :(
+    // public static Unit MostCommonIntersectionPoints(IChallenge24Input input, Boundary? boundary = null) =>
     //     new Parser().Parse(input)
     //         .CartesianPairs()
     //         .Filter(p => p.first != p.second)
     //         .Map(p => IntersectionModule.Intersection(p.first.ToRay3(), p.second.ToRay3()))
     //         .Somes()
-    //         .Count(i => (boundary ?? TestBoundary).Contains(i.Point));
+    //         .Map(i => i.Point)
+    //         .GroupBy(p => p)
+    //         .Select(ps => new {point = ps.Key, count = ps.Count()})
+    //         .OrderByDescending(g => g.count)
+    //         .Take(5)
+    //         .Apply(gs =>
+    //         {
+    //             gs.ForEach(g => Console.WriteLine($"{g.point} : {g.count}"));
+    //             return unit;
+    //         });
 
     /// Set the closest intersection points for each piece of hail
     public static Seq<HailStoneIntersection> MapIntersections(Seq<HailStoneIntersection> hsi, Boundary boundary)
