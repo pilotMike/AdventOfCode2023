@@ -11,7 +11,7 @@ public class Part1Tests
     [Fact]
     public void Part1Test_Returns_2()
     {
-        var input = TestInput.Create<IChallenge04Input, HailStone>("04_1.txt");
+        var input = TestInput.Create<IChallenge24Input, HailStone>("04_1.txt");
         
         var start = new NumberIndex(7, true);
         var end = new NumberIndex(27, true);
@@ -25,7 +25,7 @@ public class Part1Tests
     [Fact]
     public void BorrowedPart1Test_Returns_2()
     {
-        var input = TestInput.Create<IChallenge04Input, HailStone>("04_1.txt");
+        var input = TestInput.Create<IChallenge24Input, HailStone>("04_1.txt");
         
         var start = new NumberIndex(7, true);
         var end = new NumberIndex(27, true);
@@ -39,7 +39,7 @@ public class Part1Tests
     [Fact]
     public void MapIntersections_WithTestData_IsCorrect()
     {
-        var input = TestInput.Create<IChallenge04Input, HailStone>("04_1.txt");
+        var input = TestInput.Create<IChallenge24Input, HailStone>("04_1.txt");
         var hsi = new Parser().Parse(input).Map(hs => new HailStoneIntersection(hs.ToHailStone2()));
         
         var start = new NumberIndex(7, true);

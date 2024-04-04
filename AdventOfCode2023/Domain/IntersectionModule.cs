@@ -43,6 +43,7 @@ public static class IntersectionModule
     //     a.Intersects(b).Map(x=>PointD.Normalize(x));
 
     public readonly record struct IntersectionData(PointD Point, Time Time);
+    // public readonly record struct IntersectionData3(PointD3 Point, Time Time);
     public static Option<IntersectionData> Intersection(Ray a, Ray b)
     {
         if (a.Slope2.IsNaN || b.Slope2.IsNaN || a.Slope2 == b.Slope2) return default;
@@ -59,6 +60,23 @@ public static class IntersectionModule
         var y = a.Slope2 * (x - a.Point.X) + a.Point.Y;
         return new IntersectionData(new PointD(x, y), new (t1));
     }
+    
+    // public static Option<IntersectionData3> Intersection(Ray3 a, Ray3 b)
+    // {
+    //     if (a.Slope.IsNaN || b.Slope2.IsNaN || a.Slope2 == b.Slope2) return default;
+    //
+    //     var c = a.Point.Y - a.Slope2 * a.Point.X;
+    //     var otherC = b.Point.Y - b.Slope2 * b.Point.X;
+    //
+    //     var x = (otherC - c) / (a.Slope2 - b.Slope2);
+    //     var t1 = (x - a.Point.X) / a.Velocity.X;
+    //     var t2 = (x - b.Point.X) / b.Velocity.X;
+    //
+    //     if (t1 < 0 || t2 < 0) return default;
+    //
+    //     var y = a.Slope2 * (x - a.Point.X) + a.Point.Y;
+    //     return new IntersectionData(new PointD(x, y), new (t1));
+    // }
 
     public static Option<PointD> Intersection(InfiniteLine a, InfiniteLine b)
     {

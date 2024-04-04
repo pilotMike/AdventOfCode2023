@@ -3,9 +3,9 @@ using AdventOfCode2023.Parsers;
 
 namespace AdventOfCode2023.Challenges.Challenge04;
 
-public class Parser : IParser<HailStone, IChallenge04Input>
+public class Parser : IParser<HailStone, IChallenge24Input>
 {
-    public Seq<HailStone> Parse(IChallenge04Input input) =>
+    public Seq<HailStone> Parse(IChallenge24Input input) =>
         input.ReadLines()
             .Map(line =>
             {

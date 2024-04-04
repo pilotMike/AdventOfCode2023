@@ -4,7 +4,7 @@ using AdventOfCode2023.Domain;
 
 namespace AdventOfCode2023.Challenges.Challenge04;
 
-public readonly record struct HailStone(Point3 Position, Velocity3 Velocity);
+public readonly record struct HailStone(Point3 Position, Velocity3 Velocity) : IPointVelocity3;
 
 public readonly record struct HailStone2(Point Position, Velocity Velocity) : IPointVelocity2;
 
@@ -77,24 +77,32 @@ public static class Parts
             new(400000000000000, true))
     );
     
-    public static int Part1(IChallenge04Input input, Boundary? boundary = null) =>
+    public static int Part1(IChallenge24Input input, Boundary? boundary = null) =>
         new Parser().Parse(input)
             .Map(hs => new HailStoneIntersection(hs.ToHailStone2()))
             .Apply(hsi => MapIntersections(hsi, boundary ?? TestBoundary))
             //.Distinct(new HailStoneCollisionEqualityComparer())
             .Count(hsi => hsi.FirstCollision.IsSome);
 
-    public static int Part1Borrowed(IChallenge04Input input, Boundary? boundary = null) =>
+    public static int Part1Borrowed(IChallenge24Input input, Boundary? boundary = null) =>
         new Parser().Parse(input)
             .Apply(hs => Borrowed.Part1(hs, boundary ?? TestBoundary));
 
-    public static int Part1_A(IChallenge04Input input, Boundary? boundary = null) =>
+    public static int Part1_A(IChallenge24Input input, Boundary? boundary = null) =>
         new Parser().Parse(input)
             .CartesianPairs()
             .Filter(p => p.first != p.second)
             .Map(p => IntersectionModule.Intersection(p.first.ToHailStone2().ToRay(), p.second.ToHailStone2().ToRay()))
             .Somes()
             .Count(i => (boundary ?? TestBoundary).Contains(i.Point));
+    
+    // public static int Part2_A(IChallenge24Input input, Boundary? boundary = null) =>
+    //     new Parser().Parse(input)
+    //         .CartesianPairs()
+    //         .Filter(p => p.first != p.second)
+    //         .Map(p => IntersectionModule.Intersection(p.first.ToRay3(), p.second.ToRay3()))
+    //         .Somes()
+    //         .Count(i => (boundary ?? TestBoundary).Contains(i.Point));
 
     /// Set the closest intersection points for each piece of hail
     public static Seq<HailStoneIntersection> MapIntersections(Seq<HailStoneIntersection> hsi, Boundary boundary)
