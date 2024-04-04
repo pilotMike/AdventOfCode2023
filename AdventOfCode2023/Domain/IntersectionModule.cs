@@ -1,4 +1,6 @@
+using System.Numerics;
 using AdventOfCode2023.Challenges.Challenge04;
+using AdventOfCode2023.Domain.Geometries;
 
 namespace AdventOfCode2023.Domain;
 
@@ -59,6 +61,66 @@ public static class IntersectionModule
 
         var y = a.Slope2 * (x - a.Point.X) + a.Point.Y;
         return new IntersectionData(new PointD(x, y), new (t1));
+    }
+    
+    public readonly record struct IntersectionData3(Point3D Point, Time Time);
+
+    public static Option<IntersectionData3> Intersection(Ray3 a, Ray3 b) =>
+        LineLine(
+            a.Point.ToVector3(), a.Velocity.ToVector3(),
+            b.Point.ToVector3(), b.Velocity.ToVector3(),
+            out var intersection, out float distance)
+            ? new IntersectionData3(new Point3D(intersection.X, intersection.Y, intersection.Z), new Time(distance))
+            : None;
+        
+    
+    /// <summary>
+    /// Computes an intersection of the lines.
+    /// copied from https://github.com/Syomus/ProceduralToolkit/blob/48c93f9eb1a629947408d9060fd5175eb5304737/Runtime/Geometry/Intersect3D.cs#L8
+    /// </summary>
+    private static bool LineLine(Vector3 originA, Vector3 directionA, Vector3 originB, Vector3 directionB,
+        out Vector3 intersection, out float distance)
+    {
+        float sqrMagnitudeA = directionA.SqrMagnitude();
+        float sqrMagnitudeB = directionB.SqrMagnitude();
+        float dotAB = Vector3.Dot(directionA, directionB);
+
+        float denominator = sqrMagnitudeA*sqrMagnitudeB - dotAB*dotAB;
+        Vector3 originBToA = originA - originB;
+        float a = Vector3.Dot(directionA, originBToA);
+        float b = Vector3.Dot(directionB, originBToA);
+
+        Vector3 closestPointA;
+        Vector3 closestPointB;
+        if (Math.Abs(denominator) < Geometry.Epsilon)
+        {
+            // Parallel
+            float distanceB = dotAB > sqrMagnitudeB ? a/dotAB : b/sqrMagnitudeB;
+
+            closestPointA = originA;
+            closestPointB = originB + directionB*distanceB;
+
+            distance = default;
+        }
+        else
+        {
+            // Not parallel
+            float distanceA = (sqrMagnitudeA*b - dotAB*a)/denominator;
+            float distanceB = (dotAB*b - sqrMagnitudeB*a)/denominator;
+
+            closestPointA = originA + directionA*distanceA;
+            closestPointB = originB + directionB*distanceB;
+
+            distance = distanceA;
+        }
+
+        if ((closestPointB - closestPointA).SqrMagnitude() < Geometry.Epsilon)
+        {
+            intersection = closestPointA;
+            return true;
+        }
+        intersection = Vector3.Zero;
+        return false;
     }
     
     // public static Option<IntersectionData3> Intersection(Ray3 a, Ray3 b)

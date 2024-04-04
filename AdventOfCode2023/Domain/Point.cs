@@ -29,6 +29,7 @@ public readonly record struct Point3(long X, long Y, long Z)
     public static explicit operator Point3((long x, long y, long z) t) => new Point3(t.x, t.y, t.z);
 
     public Point ToPoint2() => (Point)this;
+    public Vector3 ToVector3() => new(X, Y, Z);
 }
 
 public readonly record struct PointD(double X, double Y)
@@ -42,5 +43,21 @@ public readonly record struct PointD(double X, double Y)
         Math.Sqrt(
             Math.Pow(other.X - X, 2) +
             Math.Pow(other.Y - Y, 2)
+        ).Apply(v => new Distance(v));
+}
+
+public readonly record struct Point3D(double X, double Y, double Z)
+{
+    public Vector3 ToVector3() => new ((float)X, (float)Y, (float)Z);
+    public static Vector3 CrossProduct(Point3D a, Point3D b) => Vector3.Cross(a.ToVector3(), b.ToVector3());
+
+    public static Point3D Normalize(Point3D p, int decimalPlaces = 3) =>
+        new (Math.Round(p.X, decimalPlaces), Math.Round(p.Y, decimalPlaces), Math.Round(p.Z, decimalPlaces));
+    
+    public Distance Distance(Point3D other) =>
+        Math.Sqrt(
+            Math.Pow(other.X - X, 2) +
+            Math.Pow(other.Y - Y, 2) +
+            Math.Pow(other.Z - Z, 2)
         ).Apply(v => new Distance(v));
 }
