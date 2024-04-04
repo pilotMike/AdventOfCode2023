@@ -2,7 +2,7 @@ namespace AdventOfCode2023.Domain;
 
 public record struct PointRange(Point Start, Point End)
 {
-    public int LengthX => Math.Abs(End.X - Start.X);
+    public long LengthX => Math.Abs(End.X - Start.X);
     
     /// <summary>Can have negative values or values beyond the array. Returns all points surrounding this item.
     /// Assumes Horizontal orientation
@@ -16,7 +16,7 @@ public record struct PointRange(Point Start, Point End)
         // return the row above with the extra width, row below, and two on the center
         // above
         var y = Start.Y - 1;
-        for (int x = start; x <= end; x++)
+        for (long x = start; x <= end; x++)
             yield return new Point(x, y);
         
         // two in center
@@ -25,7 +25,7 @@ public record struct PointRange(Point Start, Point End)
         
         // bottom row
         y = Start.Y + 1;
-        for (int x = start; x <= end; x++)
+        for (long x = start; x <= end; x++)
             yield return new Point(x, y);
     }
 

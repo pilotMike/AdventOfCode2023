@@ -2,6 +2,8 @@ namespace AdventOfCode2023.Domain;
 
 public readonly record struct Ray(Point Point, Velocity Velocity)
 {
+    public Slope Slope2 => Velocity.ToSlope2();
+    
     public InfiniteLine InfiniteLine
     {
         get

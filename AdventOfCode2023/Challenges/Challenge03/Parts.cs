@@ -24,9 +24,9 @@ public record struct Symbol(char Character)
 
 public record struct Gear(SchematicNumber First, SchematicNumber Second);
 
-public record struct SchematicNumber(PointRange PointRange, int Value)
+public record struct SchematicNumber(PointRange PointRange, long Value)
 {
-    public SchematicNumber(Point start, int LengthX, int value)
+    public SchematicNumber(Point start, long LengthX, long value)
         : this(new PointRange(start, start with { X = start.X + LengthX }), value)
     {
     }
@@ -56,7 +56,7 @@ public class Schematic
         }
 
         Point lastPoint = default;
-        int lastLine = 0;
+        long lastLine = 0;
         SchematicNumbers = _data.SelectAll((Point, SchematicCharacter) => (Point, SchematicCharacter))
             .Segment(item =>
             {
@@ -161,7 +161,7 @@ public class Schematic
 
 public static class Parts
 {
-    public static int Part1(IChallenge03Input input)
+    public static long Part1(IChallenge03Input input)
     {
         var schematicDiagram = new Schematic(new Parser().Parse(input));
 
@@ -171,7 +171,7 @@ public static class Parts
             .Sum();
     }
 
-    public static int Part2(IChallenge03Input input)
+    public static long Part2(IChallenge03Input input)
     {
         var schematicDiagram = new Schematic(new Parser().Parse(input));
         var symbols = schematicDiagram.SchematicSymbols;

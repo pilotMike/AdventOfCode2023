@@ -24,6 +24,14 @@ public class IntersectionTests
         18, 19, 22, -1, -1, -2,
         20, 25, 34, -2, -2, -4,
         null, null)]
+    [InlineData(
+        18, 19, 22, -1, 0, -2,
+        20, 25, 34, -2, 0, -4,
+        null, null)]
+    [InlineData(
+        18, 19, 22, 0, -1, -2,
+        20, 25, 34, 0, -2, -4,
+        null, null)]
     public static void Intersections(
         int x, int y, int z, int vx, int vy, int vz,
         int x2, int y2, int z2, int vx2, int vy2, int vz2,

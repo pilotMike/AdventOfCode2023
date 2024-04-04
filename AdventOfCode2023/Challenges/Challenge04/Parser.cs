@@ -13,7 +13,7 @@ public class Parser : IParser<HailStone, IChallenge04Input>
                 var coordinates = parts[0].Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
                 var velocity = parts[1].Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
 
-                var point = (Point3)(int.Parse(coordinates[0]), int.Parse(coordinates[1]), int.Parse(coordinates[2]));
+                var point = (Point3)(long.Parse(coordinates[0]), long.Parse(coordinates[1]), long.Parse(coordinates[2]));
                 var vel = (Velocity3)(int.Parse(velocity[0]), int.Parse(velocity[1]), int.Parse(velocity[2]));
 
                 return new HailStone(point, vel);

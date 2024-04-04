@@ -4,7 +4,7 @@ public readonly record struct Velocity(int X, int Y)
 {
     public static double operator *(int i, Velocity s) => i * s.ToSlope2();
 
-    public Slope ToSlope2() => new Slope((double)Y / (double)X);
+    public Slope ToSlope2() => X == 0 ? new Slope(Double.NaN) : new Slope((double)Y / X);
 }
 
 public readonly record struct Velocity3(int X, int Y, int Z)
