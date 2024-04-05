@@ -1,3 +1,5 @@
+using AdventOfCode2023.Domain.Geometries;
+
 namespace AdventOfCode2023.Domain;
 
 public record struct PointRange(Point Start, Point End)

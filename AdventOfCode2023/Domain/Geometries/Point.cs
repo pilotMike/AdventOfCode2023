@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace AdventOfCode2023.Domain;
+namespace AdventOfCode2023.Domain.Geometries;
 
 public readonly record struct Point(long X, long Y) : ISubtractionOperators<Point, Point, Point>
 {

@@ -1,4 +1,4 @@
-namespace AdventOfCode2023.Domain;
+namespace AdventOfCode2023.Domain.Geometries;
 
 public readonly record struct Line(Point Start, Point End)
 {

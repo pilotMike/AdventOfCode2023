@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using AdventOfCode2023.Challenges.Challenge04.BorrowedCode;
 using AdventOfCode2023.Domain;
+using AdventOfCode2023.Domain.Geometries;
 using MoreLinq;
 
 namespace AdventOfCode2023.Challenges.Challenge04;

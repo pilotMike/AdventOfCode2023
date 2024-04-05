@@ -2,6 +2,7 @@ global using SchematicCharacter =
     LanguageExt.Option<LanguageExt.Either<int, AdventOfCode2023.Challenges.Challenge03.Symbol>>;
 using System.Numerics;
 using AdventOfCode2023.Domain;
+using AdventOfCode2023.Domain.Geometries;
 using MoreLinq;
 using static AdventOfCode2023.Challenges.Challenge03.Module;
 

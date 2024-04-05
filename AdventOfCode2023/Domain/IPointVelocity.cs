@@ -1,3 +1,5 @@
+using AdventOfCode2023.Domain.Geometries;
+
 namespace AdventOfCode2023.Domain;
 
 public interface IPointVelocity2

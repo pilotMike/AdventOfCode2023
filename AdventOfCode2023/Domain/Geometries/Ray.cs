@@ -1,4 +1,4 @@
-namespace AdventOfCode2023.Domain;
+namespace AdventOfCode2023.Domain.Geometries;
 
 public readonly record struct Ray3(Point3 Point, Velocity3 Velocity);
 

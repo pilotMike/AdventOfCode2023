@@ -1,4 +1,5 @@
 using AdventOfCode2023.Domain;
+using AdventOfCode2023.Domain.Geometries;
 
 namespace AdventOfCode2023.Extensions;
 

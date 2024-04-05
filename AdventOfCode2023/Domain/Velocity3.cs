@@ -1,4 +1,5 @@
 using System.Numerics;
+using AdventOfCode2023.Domain.Geometries;
 
 namespace AdventOfCode2023.Domain;
 
