@@ -1,5 +1,6 @@
 using System.Numerics;
 using AdventOfCode2023.Challenges.Challenge04;
+using AdventOfCode2023.Challenges.Challenge24;
 using AdventOfCode2023.Domain.Geometries;
 
 namespace AdventOfCode2023.Domain;

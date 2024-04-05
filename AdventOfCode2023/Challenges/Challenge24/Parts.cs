@@ -1,10 +1,9 @@
 using System.Diagnostics;
-using AdventOfCode2023.Challenges.Challenge04.BorrowedCode;
+using AdventOfCode2023.Challenges.Challenge24.BorrowedCode;
 using AdventOfCode2023.Domain;
 using AdventOfCode2023.Domain.Geometries;
-using MoreLinq;
 
-namespace AdventOfCode2023.Challenges.Challenge04;
+namespace AdventOfCode2023.Challenges.Challenge24;
 
 public readonly record struct HailStone(Point3 Position, Velocity3 Velocity) : IPointVelocity3;
 
@@ -87,11 +86,11 @@ public static class Parts
             .Count(hsi => hsi.FirstCollision.IsSome);
 
     public static int Part1Borrowed(IChallenge24Input input, Boundary? boundary = null) =>
-        new Parser().Parse(input)
+        new Challenge24.Parser().Parse(input)
             .Apply(hs => Borrowed.Part1(hs, boundary ?? TestBoundary));
 
     public static int Part1_A(IChallenge24Input input, Boundary? boundary = null) =>
-        new Parser().Parse(input)
+        new Challenge24.Parser().Parse(input)
             .CartesianPairs()
             .Filter(p => p.first != p.second)
             .Map(p => IntersectionModule.Intersection(p.first.ToHailStone2().ToRay(), p.second.ToHailStone2().ToRay()))

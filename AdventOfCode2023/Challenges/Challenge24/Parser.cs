@@ -1,8 +1,9 @@
+using AdventOfCode2023.Challenges.Challenge04;
 using AdventOfCode2023.Domain;
 using AdventOfCode2023.Domain.Geometries;
 using AdventOfCode2023.Parsers;
 
-namespace AdventOfCode2023.Challenges.Challenge04;
+namespace AdventOfCode2023.Challenges.Challenge24;
 
 public class Parser : IParser<HailStone, IChallenge24Input>
 {

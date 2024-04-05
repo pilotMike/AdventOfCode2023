@@ -1,8 +1,7 @@
 using AdventOfCode2023.Domain;
 using AdventOfCode2023.Domain.Geometries;
-using MoreLinq;
 
-namespace AdventOfCode2023.Challenges.Challenge04.BorrowedCode;
+namespace AdventOfCode2023.Challenges.Challenge24.BorrowedCode;
 
 public static class Borrowed
 {

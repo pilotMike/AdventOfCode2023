@@ -1,4 +1,5 @@
 using AdventOfCode2023.Challenges.Challenge04;
+using AdventOfCode2023.Challenges.Challenge24;
 using AdventOfCode2023.Domain;
 using AdventOfCode2023.Domain.Geometries;
 using AdventOfCode2023Tests.Extensions;

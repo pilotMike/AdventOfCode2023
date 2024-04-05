@@ -17,11 +17,11 @@ public static class LanguageExtExtensions
         source.Select((item, index) => (item, index)).Find(t => predicate(t.item));
 
     public static Seq<(T first, T second)> CartesianPairs<T>(this Seq<T> seq) =>
-        from ta in seq.Map((i, x) => (i, x))
+        from ta in seq.MapS((i, x) => (i, x))
         from b in seq.Skip(ta.i + 1)
         select (ta.x, b);
 
-    public static Seq<TOut> Map<T, TOut>(this Seq<T> seq, Func<int, T, TOut> projection) =>
+    public static Seq<TOut> MapS<T, TOut>(this Seq<T> seq, Func<int, T, TOut> projection) =>
         seq.Select((x, i) => projection(i, x)).ToSeq();
 
 }
