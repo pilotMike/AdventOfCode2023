@@ -2,5 +2,5 @@ namespace AdventOfCode2023.Parsers;
 
 public interface IInputSource<TIOut>
 {
-    Seq<string> ReadLines();
+    Seq<string> ReadLines(bool includeEmptyLines = false);
 }

@@ -7,5 +7,8 @@ public abstract class InputSource(ChallengeNumber challenge, ChallengePart part)
     private Seq<string>? _data;
     private readonly string _path = $"../../../Inputs/Challenge_{challenge}_{part}.txt";
 
-    public Seq<string> ReadLines() => _data ??= File.ReadAllLines(_path).FilterNot(string.IsNullOrWhiteSpace).ToSeq();
+    public Seq<string> ReadLines(bool includeEmptyLines = false) => 
+        _data ??= File.ReadAllLines(_path)
+            .Apply(lines => includeEmptyLines ? lines : lines.FilterNot(string.IsNullOrWhiteSpace))
+            .ToSeq();
 }

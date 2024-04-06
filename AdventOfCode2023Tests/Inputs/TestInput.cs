@@ -9,7 +9,7 @@ internal static class TestInput
         where TInput : class, IInputSource<T>
     {
         var mock = new Mock<TInput>();
-        mock.Setup(x => x.ReadLines())
+        mock.Setup(x => x.ReadLines(It.IsAny<bool>()))
             .Returns(() => new TestInput<T>($"../../../Inputs/{uri}").ReadLines());
         return mock.Object;
     }
@@ -18,7 +18,7 @@ internal static class TestInput
         where TInput : class, IInputSource<T>
     {
         var mock = new Mock<TInput>();
-        mock.Setup(x => x.ReadLines())
+        mock.Setup(x => x.ReadLines(It.IsAny<bool>()))
             .Returns(() => text.Split(Environment.NewLine).ToSeq());
         return mock.Object;
     }
@@ -26,5 +26,5 @@ internal static class TestInput
 
 public class TestInput<T>(string uri) : IInputSource<T>
 {
-    public Seq<string> ReadLines() => File.ReadLines(uri).ToSeq();
+    public Seq<string> ReadLines(bool includeEmptyLines = false) => File.ReadLines(uri).ToSeq();
 }
